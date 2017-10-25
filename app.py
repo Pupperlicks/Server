@@ -32,7 +32,7 @@ class Sightings(Resource):
     def get(self):
         """Return all rat sightings."""
         conn = e.connect()
-        return {'sigtings': jsonify_row(conn.execute("select * from sightings"))}
+        return {'sightings': jsonify_row(conn.execute("select * from sightings"))}
 
     def post(self):
         """Execute an INSERT INTO sightings based on request JSON."""
@@ -56,7 +56,7 @@ class Sightings_50(Resource):
     def get(self):
         """Return the first 50 sightings of rats."""
         conn = e.connect()
-        return {'sigtings': jsonify_row(conn.execute("select * from sightings LIMIT 50"))}
+        return {'sightings': jsonify_row(conn.execute("select * from sightings LIMIT 50"))}
 
 
 api.add_resource(Sightings_50, '/50_sightings')
