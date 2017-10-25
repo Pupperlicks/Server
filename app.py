@@ -1,7 +1,9 @@
+from json import dumps
+
 from flask import Flask, request
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
-from json import dumps
+
 
 # Create a engine for connecting to SQLite3.
 # Assuming salaries.db is in your app root folder
@@ -29,6 +31,8 @@ def jsonify_row(query):
 
 
 class Sightings(Resource):
+    # A class for rat sightings. Allows for one to get, post, and delete
+    # sightings.
 
     def get(self):
         """Return all rat sightings."""
@@ -38,8 +42,7 @@ class Sightings(Resource):
     def post(self):
         # Execute an INSERT INTO sightings based on request JSON.
         conn = e.connect()
-        INSERT_SQL = f"""INSERT INTO sightings({','.join(FIELDS)}) VALUES({','.join("?"*len(FIELDS))})"""
-        query = conn.execute(INSERT_SQL, request.json)
+        query = conn.execute("""INSERT INTO sightings({','.join(FIELDS)}) VALUES({','.join("?"*len(FIELDS))})""", request.json)
 
     def delete(self):
         # Execute a DELETE based on a given unique key.
