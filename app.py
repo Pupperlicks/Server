@@ -37,23 +37,24 @@ class Sightings(Resource):
     def get(self):
         """Return all rat sightings."""
         conn = e.connect()
-        return {'sightings': jsonify_row(conn.execute("select * from sightings"))}
+        return {'sightings': jsonify_row(conn.execute("select * from sightings"))}, 200
 
     def post(self):
         # Execute an INSERT INTO sightings based on request JSON.
         conn = e.connect()
         query = conn.execute("""INSERT INTO sightings({','.join(FIELDS)}) VALUES({','.join("?"*len(FIELDS))})""", request.json)
+        return {'status': 'success'}, 201
 
     def delete(self):
         # Execute a DELETE based on a given unique key.
         conn = e.connect()
-        unique_key = request.json["Unique Key"]
+        unique_key = request.json["unique_key"]
         try:
             query = conn.execute(
                 "DELETE FROM SIGHTINGS WHERE Name=?", (unique_key,))
-            return {'status': 'success'}
+            return {'status': 'success'}, 200
         except:
-            return {'status': 'failure'}
+            return {'status': 'failure'}, 500
 
 
 class Sightings_50(Resource):
@@ -62,7 +63,7 @@ class Sightings_50(Resource):
     def get(self):
         # Return the first 50 sightings of rats.
         conn = e.connect()
-        return {'sightings': jsonify_row(conn.execute("select * from sightings LIMIT 50"))}
+        return {'sightings': jsonify_row(conn.execute("select * from sightings LIMIT 50"))}, 200
 
 
 api.add_resource(Sightings_50, '/50_sightings')
