@@ -1,5 +1,7 @@
 # Pupperlicks Server
 
+![](https://i.pinimg.com/originals/a7/d6/d0/a7d6d0e99997fc4b6d7c2e120b73f185.gif)
+
 ## Notes
 The database was populated on 10/24/17 by using the SQLite 3 CSV import utility. The database can be found in the home folder of the server named `sightings.db`. The server is a RESTful Flask implementation.
 
