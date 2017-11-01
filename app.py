@@ -3,7 +3,8 @@ from json import dumps
 from flask import Flask, request
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
-
+from dateutil.parser import *
+from datetime import *
 
 # Create a engine for connecting to SQLite3.
 # Assuming salaries.db is in your app root folder
@@ -65,9 +66,19 @@ class Sightings_50(Resource):
         conn = e.connect()
         return {'sightings': jsonify_row(conn.execute("select * from sightings LIMIT 50"))}, 200
 
+class Sightings_Range(Resource):
+    # A class to retrieve all sightings that fall between two dates.
+
+    def post(self):
+        start_date = request.json["start_date"]
+        end_date = request.json["end_date"]
+        conn = e.connect()
+        return {'sightings': jsonify_row(conn.execute('select * from sightings WHERE created_date BETWEEN "%s" AND "%s"' % (start_date, end_date)))}, 200
+
 
 api.add_resource(Sightings_50, '/50_sightings')
 api.add_resource(Sightings, '/sightings')
+api.add_resource(Sightings_Range, '/range')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

@@ -77,6 +77,18 @@ Make a virtualenv and then `sudo pip install -r requirements.txt`. You can then 
         "bridge_highway_direction":""
     }
     ```
+- `/range`
+    - Give the endpoint 2 dates, as described in the following format and it will return all of the entries in the database that fall within that range.
+
+    *Note*: Please only provide dates in the MM/DD/YYYY format. Nothing else will be (or is planned to be) supported.
+
+    Sample request:
+    ```json
+    {
+	    "start_date":"9/4/2015",
+	    "end_date":"9/6/2015"
+    }
+    ```
 
 **DELETE**
 -  `/sightings`
