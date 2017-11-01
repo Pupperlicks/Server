@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Pupperlicks/Server.svg?branch=master)](https://travis-ci.org/Pupperlicks/Server)
 # Pupperlicks Server
 
 ![](https://i.pinimg.com/originals/a7/d6/d0/a7d6d0e99997fc4b6d7c2e120b73f185.gif)
